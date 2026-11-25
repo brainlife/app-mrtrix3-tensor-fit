@@ -2,6 +2,33 @@
 [![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.346-blue.svg)](https://doi.org/10.25663/brainlife.app.346)
 
 # Fit tensor model (DTI) using mrtrix3
+
+<!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
+
+**Fits the diffusion tensor model to DWI with MRtrix3 dwi2tensor and outputs FA, MD, AD, RD, Westin shape maps and the tensor (plus kurtosis for multi-shell data).**
+
+Converts the DWI to MRtrix format, uses the provided brain mask or computes one with FSL bet, fits the tensor with dwi2tensor (optionally on a single chosen shell) and writes tensor2metric maps. For multi-shell data without a chosen shell it fits diffusional kurtosis too. Use it to get standard DTI maps for tract or ROI statistics. The norm parameter is read but not used by this branch's script.
+
+Run it on brainlife.io: [https://doi.org/10.25663/brainlife.app.528](https://doi.org/10.25663/brainlife.app.528)
+
+| Input | Datatype | Required | Description |
+|---|---|---|---|
+| `dwi` | `neuro/dwi` | yes | Diffusion-weighted image with bvals and bvecs. |
+| `mask` | `neuro/mask` (dwi, brain) | no | Optional DWI brain mask; computed with FSL bet when absent. |
+
+| Output | Datatype | Description |
+|---|---|---|
+| `output` | `neuro/tensor` | Tensor datatype: tensor.nii.gz and FA, MD, AD, RD, CL, CP, CS maps (kurtosis.nii.gz for multi-shell fits). |
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `norm` | boolean | `false` | Normalize diffusion data before fit |
+| `tensor_fit` | number |  | If user wants to fit tensor to a specific shell, specify here. otherwise will fit on entire diffusion data |
+
+Runtime: container `brainlife/mrtrix3:3.0_RC3`; 1 CPUs; 20 GB memory; 0.5 h walltime.
+
+<!-- brainlife-app:end -->
+
 This app will fit the diffusion tensor model (DTI) to a dMRI input using MRTrix3. The app can run on multi-shell or single shell data, and the user can specify which shell to use. This app can also normalize the diffusion data before model fitting based on user input. This app will output the neuro/tensor output on brainlife, including individual nifti files for FA, MD, AD, and RD, the tensors nifti, westin-shape niftis, and a kurtosis nifti if multi-shell data. This app takes a neuro/dwi datatype as input, and an optional neuro/mask dwi brain datatype input. If mask not inputted, will generate mask.
 Note: this code was originally written by Brent McPherson (bcmcpher@iu.edu) for the Anatomically-constrained white matter tractography applications. This code was taken directly from brainlife/app-mrtrix3-act. All credit should go to Brent McPherson.
 
