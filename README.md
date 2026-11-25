@@ -10,7 +10,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg" alt="MIT license"></a>
 </p>
 
-## 🧠 At a glance
+## At a glance
 
 <!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
 
@@ -20,27 +20,27 @@ Converts the DWI to MRtrix format, uses the provided brain mask or computes one 
 
 | | |
 |---|---|
-| 📥 **Inputs** | `neuro/dwi` · `neuro/mask` (optional) |
-| 📤 **Outputs** | `neuro/tensor` |
-| 🐳 **Container** | `brainlife/mrtrix3:3.0_RC3` |
-| ⚙️ **Resources** | 1 CPUs · 20 GB memory · 0.5 h walltime |
-| 🔗 **Run it** | [doi.org/10.25663/brainlife.app.528](https://doi.org/10.25663/brainlife.app.528) |
+| **Inputs** | `neuro/dwi` · `neuro/mask` (optional) |
+| **Outputs** | `neuro/tensor` |
+| **Container** | `brainlife/mrtrix3:3.0_RC3` |
+| **Resources** | 1 CPUs · 20 GB memory · 0.5 h walltime |
+| **Run it** | [doi.org/10.25663/brainlife.app.528](https://doi.org/10.25663/brainlife.app.528) |
 
-#### 📥 Inputs
+#### Inputs
 
 | Input | Datatype | Required | Description |
 |---|---|---|---|
 | `dwi` | `neuro/dwi` | yes | Diffusion-weighted image with bvals and bvecs. |
 | `mask` | `neuro/mask` (dwi, brain) | no | Optional DWI brain mask; computed with FSL bet when absent. |
 
-#### 📤 Outputs
+#### Outputs
 
 | Output | Datatype | Description |
 |---|---|---|
 | `output` | `neuro/tensor` | Tensor datatype: tensor.nii.gz and FA, MD, AD, RD, CL, CP, CS maps (kurtosis.nii.gz for multi-shell fits). |
 
 <details>
-<summary><b>⚙️ Parameters</b> (2)</summary>
+<summary><b>Parameters</b> (2)</summary>
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
@@ -51,9 +51,9 @@ Converts the DWI to MRtrix format, uses the provided brain mask or computes one 
 
 <!-- brainlife-app:end -->
 
-## 🚀 Running the App
+## Running the App
 
-### ☁️ On brainlife.io
+### On brainlife.io
 
 Open the App at [doi.org/10.25663/brainlife.app.528](https://doi.org/10.25663/brainlife.app.528), choose a `neuro/dwi` dataset (and, optionally, a DWI brain mask) from your project and press **Execute**. The App works on single- and multi-shell data; to fit the tensor to one shell only, set `tensor_fit` to its b-value. The results are archived as a `neuro/tensor` dataset tagged `mrtrix3`, ready for tract-profile and ROI statistics Apps.
 
@@ -65,7 +65,7 @@ How the tensor is fitted:
 
 Without a mask input, a brain mask is computed with FSL `bet -R -m -f 0.3`. The `norm` parameter is read but not used by this version.
 
-### 💻 Locally
+### Locally
 
 You need [Singularity/Apptainer](https://apptainer.org/) and [`jq`](https://jqlang.github.io/jq/). The App runs MRtrix3 and FSL from the `brainlife/mrtrix3:3.0_RC3` container.
 
@@ -89,7 +89,7 @@ You need [Singularity/Apptainer](https://apptainer.org/) and [`jq`](https://jqla
    ./main
    ```
 
-## 📦 Outputs
+## Outputs
 
 ```text
 output/
@@ -100,11 +100,11 @@ output/
 └── kurtosis.nii.gz           diffusional kurtosis (multi-shell fits only)
 ```
 
-## 🩺 Troubleshooting
+## Troubleshooting
 
 - **`something went wrong. check derivatives`**: `output/tensor.nii.gz` was not written. Check the log for the MRtrix3 error, and that the bvals and bvecs match the DWI.
 
-## 📚 Citing
+## Citing
 
 > [!TIP]
 > If you use this App in your work, please cite the App, the software it builds on and brainlife.io (below). GitHub's **Cite this repository** button gives the App citation in APA and BibTeX.
@@ -118,7 +118,7 @@ output/
 - Hayashi S, Caron BA, Heinsfeld AS, et al. brainlife.io: a decentralized and open-source cloud platform to support neuroscience research. *Nature Methods* 21:809–813 (2024). [doi:10.1038/s41592-024-02237-2](https://doi.org/10.1038/s41592-024-02237-2)
 - Avesani P, McPherson B, Hayashi S, et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. *Scientific Data* 6:69 (2019). [doi:10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
 
-## 👥 Authors
+## Authors
 
 - Brent McPherson
 - Bradley Caron
@@ -128,7 +128,7 @@ output/
 
 The fitting code was taken directly from [brainlife/app-mrtrix3-act](https://github.com/brainlife/app-mrtrix3-act), written by Brent McPherson for the anatomically-constrained tractography Apps; all credit for it goes to him.
 
-## 💰 Funding
+## Funding
 
 [![Wellcome-226486/Z/22/Z](https://img.shields.io/badge/Wellcome-226486%2FZ%2F22%2FZ-purple.svg)](https://wellcome.org/)
 [![NIH-NINDS-U24NS140384](https://img.shields.io/badge/NIH_NINDS-U24NS140384-green.svg)](https://reporter.nih.gov/project-details/11261037)
@@ -147,6 +147,6 @@ The fitting code was taken directly from [brainlife/app-mrtrix3-act](https://git
 
 <sub>brainlife.io is publicly funded, and acknowledging that support helps keep it running. This App was developed with support from Wellcome, the U.S. National Institutes of Health (including the BRAIN Initiative BRAIN CONNECTS program: The Axonal Projectome EXchange, U24NS140384, and the Center for Mesoscale Connectomics, UM1NS132207) and the U.S. National Science Foundation.</sub>
 
-## ⚖️ License
+## License
 
 [MIT](LICENSE). MRtrix3 and FSL are distributed under their own licenses.
